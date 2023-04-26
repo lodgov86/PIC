@@ -246,7 +246,7 @@ class Ui_MainWindow(object):
         self.D13PushButton.setText(QCoreApplication.translate("MainWindow", u"D13", None))
         self.D12PushButton.setText(QCoreApplication.translate("MainWindow", u"D12", None))
         self.D15PushButton.setText(QCoreApplication.translate("MainWindow", u"D15", None))
-        self.EnterLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435</p><p align=\"center\">\u0432 \u0434\u0438\u0430\u043f\u043e\u0437\u043e\u043d\u0435 \u043e\u0442 1 \u0434\u043e 32 786:</p></body></html>", None))
+        self.EnterLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435</p><p align=\"center\">\u0432 \u0434\u0438\u0430\u043f\u043e\u0437\u043e\u043d\u0435 \u043e\u0442 0 \u0434\u043e 32 767:</p></body></html>", None))
         self.OkPushButton.setText(QCoreApplication.translate("MainWindow", u"OK", None))
     # retranslateUi
 
