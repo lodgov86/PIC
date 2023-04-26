@@ -15,27 +15,27 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QGridLayout, QMainWindow, QPushButton,
-    QSizePolicy, QWidget)
-import LedFiles
+from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLineEdit,
+    QMainWindow, QPushButton, QSizePolicy, QWidget)
+#import LedFiles_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(595, 255)
+        MainWindow.resize(595, 354)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
         MainWindow.setMinimumSize(QSize(595, 255))
-        MainWindow.setMaximumSize(QSize(595, 255))
+        MainWindow.setMaximumSize(QSize(999, 999))
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
         self.gridLayoutWidget = QWidget(self.centralwidget)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(0, 0, 591, 251))
+        self.gridLayoutWidget.setGeometry(QRect(0, 100, 591, 251))
         self.gridLayout = QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(5, 5, 5, 5)
@@ -209,6 +209,18 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.D15PushButton, 3, 3, 1, 1)
 
+        self.EnterLabel = QLabel(self.centralwidget)
+        self.EnterLabel.setObjectName(u"EnterLabel")
+        self.EnterLabel.setGeometry(QRect(200, 10, 191, 45))
+        font = QFont()
+        font.setBold(True)
+        self.EnterLabel.setFont(font)
+        self.lineEdit = QLineEdit(self.centralwidget)
+        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setGeometry(QRect(210, 60, 181, 31))
+        self.OkPushButton = QPushButton(self.centralwidget)
+        self.OkPushButton.setObjectName(u"OkPushButton")
+        self.OkPushButton.setGeometry(QRect(400, 60, 75, 31))
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
@@ -234,5 +246,7 @@ class Ui_MainWindow(object):
         self.D13PushButton.setText(QCoreApplication.translate("MainWindow", u"D13", None))
         self.D12PushButton.setText(QCoreApplication.translate("MainWindow", u"D12", None))
         self.D15PushButton.setText(QCoreApplication.translate("MainWindow", u"D15", None))
+        self.EnterLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435</p><p align=\"center\">\u0432 \u0434\u0438\u0430\u043f\u043e\u0437\u043e\u043d\u0435 \u043e\u0442 1 \u0434\u043e 32 786:</p></body></html>", None))
+        self.OkPushButton.setText(QCoreApplication.translate("MainWindow", u"OK", None))
     # retranslateUi
 
