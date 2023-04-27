@@ -203,6 +203,22 @@ class Led(QMainWindow):
         self.out = 0
         data = self.control_type_lineEdit(self.lineEdit)
         data = int(data)
+        self.gpio_out.write(self.out)
+        self.D00PushButton.setChecked(False)
+        self.D01PushButton.setChecked(False)
+        self.D02PushButton.setChecked(False)
+        self.D03PushButton.setChecked(False)
+        self.D04PushButton.setChecked(False)
+        self.D05PushButton.setChecked(False)
+        self.D06PushButton.setChecked(False)
+        self.D07PushButton.setChecked(False)
+        self.D08PushButton.setChecked(False)
+        self.D09PushButton.setChecked(False)
+        self.D10PushButton.setChecked(False)
+        self.D11PushButton.setChecked(False)
+        self.D12PushButton.setChecked(False)
+        self.D13PushButton.setChecked(False)
+        self.D14PushButton.setChecked(False)
 
         if data == 0:
             self.out = 0
@@ -225,7 +241,7 @@ class Led(QMainWindow):
         if data % 2 != 0:
             self.out = self.out + 128
             self.gpio_out.write(self.out)
-            self.D00PushButton.isChecked = True
+            self.D00PushButton.setChecked(True)
             data = data - 1
             self.testNaStepen(data)
         else:
