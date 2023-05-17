@@ -16,26 +16,45 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QGridLayout, QLabel, QLineEdit,
-    QMainWindow, QPushButton, QSizePolicy, QWidget)
+    QMainWindow, QPushButton, QSizePolicy, QTabWidget,
+    QTextBrowser, QWidget)
 #import LedFiles_rc
 
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         if not MainWindow.objectName():
             MainWindow.setObjectName(u"MainWindow")
-        MainWindow.resize(595, 354)
+        MainWindow.resize(600, 370)
         sizePolicy = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(MainWindow.sizePolicy().hasHeightForWidth())
         MainWindow.setSizePolicy(sizePolicy)
-        MainWindow.setMinimumSize(QSize(595, 354))
-        MainWindow.setMaximumSize(QSize(595, 354))
+        MainWindow.setMinimumSize(QSize(600, 370))
+        MainWindow.setMaximumSize(QSize(600, 370))
+        MainWindow.setAnimated(True)
         self.centralwidget = QWidget(MainWindow)
         self.centralwidget.setObjectName(u"centralwidget")
-        self.gridLayoutWidget = QWidget(self.centralwidget)
+        self.tabWidget = QTabWidget(self.centralwidget)
+        self.tabWidget.setObjectName(u"tabWidget")
+        self.tabWidget.setGeometry(QRect(0, 0, 601, 371))
+        self.tabWidget.setFocusPolicy(Qt.NoFocus)
+        self.tab1 = QWidget()
+        self.tab1.setObjectName(u"tab1")
+        self.tab1.setEnabled(True)
+        self.tab1.setFocusPolicy(Qt.NoFocus)
+        self.lineEdit = QLineEdit(self.tab1)
+        self.lineEdit.setObjectName(u"lineEdit")
+        self.lineEdit.setGeometry(QRect(210, 50, 181, 31))
+        self.EnterLabel = QLabel(self.tab1)
+        self.EnterLabel.setObjectName(u"EnterLabel")
+        self.EnterLabel.setGeometry(QRect(200, 0, 191, 45))
+        font = QFont()
+        font.setBold(True)
+        self.EnterLabel.setFont(font)
+        self.gridLayoutWidget = QWidget(self.tab1)
         self.gridLayoutWidget.setObjectName(u"gridLayoutWidget")
-        self.gridLayoutWidget.setGeometry(QRect(0, 100, 591, 251))
+        self.gridLayoutWidget.setGeometry(QRect(0, 90, 591, 251))
         self.gridLayout = QGridLayout(self.gridLayoutWidget)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(5, 5, 5, 5)
@@ -209,27 +228,35 @@ class Ui_MainWindow(object):
 
         self.gridLayout.addWidget(self.D15PushButton, 3, 3, 1, 1)
 
-        self.EnterLabel = QLabel(self.centralwidget)
-        self.EnterLabel.setObjectName(u"EnterLabel")
-        self.EnterLabel.setGeometry(QRect(200, 10, 191, 45))
-        font = QFont()
-        font.setBold(True)
-        self.EnterLabel.setFont(font)
-        self.lineEdit = QLineEdit(self.centralwidget)
-        self.lineEdit.setObjectName(u"lineEdit")
-        self.lineEdit.setGeometry(QRect(210, 60, 181, 31))
-        self.OkPushButton = QPushButton(self.centralwidget)
+        self.OkPushButton = QPushButton(self.tab1)
         self.OkPushButton.setObjectName(u"OkPushButton")
-        self.OkPushButton.setGeometry(QRect(400, 60, 75, 31))
+        self.OkPushButton.setGeometry(QRect(400, 50, 75, 31))
+        self.tabWidget.addTab(self.tab1, "")
+        self.tab2 = QWidget()
+        self.tab2.setObjectName(u"tab2")
+        self.lineEdit2 = QLineEdit(self.tab2)
+        self.lineEdit2.setObjectName(u"lineEdit2")
+        self.lineEdit2.setGeometry(QRect(210, 50, 181, 31))
+        self.Ok2PushButton = QPushButton(self.tab2)
+        self.Ok2PushButton.setObjectName(u"Ok2PushButton")
+        self.Ok2PushButton.setGeometry(QRect(400, 50, 75, 31))
+        self.textBrowser = QTextBrowser(self.tab2)
+        self.textBrowser.setObjectName(u"textBrowser")
+        self.textBrowser.setGeometry(QRect(10, 90, 581, 251))
+        self.tabWidget.addTab(self.tab2, "")
         MainWindow.setCentralWidget(self.centralwidget)
 
         self.retranslateUi(MainWindow)
+
+        self.tabWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(MainWindow)
     # setupUi
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(QCoreApplication.translate("MainWindow", u"MainWindow", None))
+        self.EnterLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435</p><p align=\"center\">\u0432 \u0434\u0438\u0430\u043f\u043e\u0437\u043e\u043d\u0435 \u043e\u0442 0 \u0434\u043e 32 767:</p></body></html>", None))
         self.D08PushButton.setText(QCoreApplication.translate("MainWindow", u"D8", None))
         self.D00PushButton.setText(QCoreApplication.translate("MainWindow", u"D0", None))
         self.D03PushButton.setText(QCoreApplication.translate("MainWindow", u"D3", None))
@@ -246,7 +273,9 @@ class Ui_MainWindow(object):
         self.D13PushButton.setText(QCoreApplication.translate("MainWindow", u"D13", None))
         self.D12PushButton.setText(QCoreApplication.translate("MainWindow", u"D12", None))
         self.D15PushButton.setText(QCoreApplication.translate("MainWindow", u"D15", None))
-        self.EnterLabel.setText(QCoreApplication.translate("MainWindow", u"<html><head/><body><p align=\"center\">\u0412\u0432\u0435\u0434\u0438\u0442\u0435 \u0437\u043d\u0430\u0447\u0435\u043d\u0438\u0435</p><p align=\"center\">\u0432 \u0434\u0438\u0430\u043f\u043e\u0437\u043e\u043d\u0435 \u043e\u0442 0 \u0434\u043e 32 767:</p></body></html>", None))
         self.OkPushButton.setText(QCoreApplication.translate("MainWindow", u"OK", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab1), QCoreApplication.translate("MainWindow", u"MPSSE", None))
+        self.Ok2PushButton.setText(QCoreApplication.translate("MainWindow", u"OK", None))
+        self.tabWidget.setTabText(self.tabWidget.indexOf(self.tab2), QCoreApplication.translate("MainWindow", u"UART", None))
     # retranslateUi
 

@@ -1,5 +1,6 @@
 import LedFiles
 import sys
+import UART
 from Led import Ui_MainWindow
 from PySide6.QtWidgets import QMainWindow, QApplication
 from pyftdi.gpio import GpioAsyncController,GpioMpsseController,GpioMpsseController
@@ -18,7 +19,11 @@ class Led(QMainWindow):
 
         self.EnterLabel  = self.ui.EnterLabel
         self.lineEdit = self.ui.lineEdit
+        self.lineEdit2 = self.ui.lineEdit2
+        self.tabWidget = self.ui.tabWidget
         self.OkPushButton = self.ui.OkPushButton
+        self.Ok2PushButton = self.ui.Ok2PushButton
+        self.textBrowser = self.ui.textBrowser
         self.D00PushButton = self.ui.D00PushButton
         self.D01PushButton = self.ui.D01PushButton
         self.D02PushButton = self.ui.D02PushButton
@@ -55,7 +60,11 @@ class Led(QMainWindow):
         self.D14PushButton.clicked.connect(self.D14PushButtonState)
         #self.D15PushButton.clicked.connect(self.D15PushButtonState)
         self.OkPushButton.clicked.connect(self.push_OkPushButton)
+        self.tabWidget.currentChanged.connect(self.UartTab)
 
+    def UartTab(self, i):
+        if i == 1:
+            UART.UART()
 
     def D00PushButtonState(self):
         if(self.D00PushButton.isChecked()):
@@ -201,43 +210,16 @@ class Led(QMainWindow):
 
     def push_OkPushButton(self):
         self.out = 0
-        data = self.control_type_lineEdit(self.lineEdit)
-        data = int(data)
+        self.AllPushButtonsFalse()
+        #data = self.control_type_lineEdit(self.lineEdit)
+        data = self.lineEdit.text()
+        data = int(data, 0)
         self.gpio_out.write(self.out)
-        self.D00PushButton.setChecked(False)
-        self.D01PushButton.setChecked(False)
-        self.D02PushButton.setChecked(False)
-        self.D03PushButton.setChecked(False)
-        self.D04PushButton.setChecked(False)
-        self.D05PushButton.setChecked(False)
-        self.D06PushButton.setChecked(False)
-        self.D07PushButton.setChecked(False)
-        self.D08PushButton.setChecked(False)
-        self.D09PushButton.setChecked(False)
-        self.D10PushButton.setChecked(False)
-        self.D11PushButton.setChecked(False)
-        self.D12PushButton.setChecked(False)
-        self.D13PushButton.setChecked(False)
-        self.D14PushButton.setChecked(False)
 
         if data == 0:
             self.out = 0
             self.gpio_out.write(self.out)
-            self.D00PushButton.setChecked(False)
-            self.D01PushButton.setChecked(False)
-            self.D02PushButton.setChecked(False)
-            self.D03PushButton.setChecked(False)
-            self.D04PushButton.setChecked(False)
-            self.D05PushButton.setChecked(False)
-            self.D06PushButton.setChecked(False)
-            self.D07PushButton.setChecked(False)
-            self.D08PushButton.setChecked(False)
-            self.D09PushButton.setChecked(False)
-            self.D10PushButton.setChecked(False)
-            self.D11PushButton.setChecked(False)
-            self.D12PushButton.setChecked(False)
-            self.D13PushButton.setChecked(False)
-            self.D14PushButton.setChecked(False)
+            self.AllPushButtonsFalse()
         if data % 2 != 0:
             self.out = self.out + 128
             self.gpio_out.write(self.out)
@@ -319,6 +301,24 @@ class Led(QMainWindow):
             self.gpio_out.write(self.out)
             self.D01PushButton.setChecked(True)
             data = data - 2
+
+
+    def AllPushButtonsFalse(self):
+         self.D00PushButton.setChecked(False)
+         self.D01PushButton.setChecked(False)
+         self.D02PushButton.setChecked(False)
+         self.D03PushButton.setChecked(False)
+         self.D04PushButton.setChecked(False)
+         self.D05PushButton.setChecked(False)
+         self.D06PushButton.setChecked(False)
+         self.D07PushButton.setChecked(False)
+         self.D08PushButton.setChecked(False)
+         self.D09PushButton.setChecked(False)
+         self.D10PushButton.setChecked(False)
+         self.D11PushButton.setChecked(False)
+         self.D12PushButton.setChecked(False)
+         self.D13PushButton.setChecked(False)
+         self.D14PushButton.setChecked(False)
 
 
 
