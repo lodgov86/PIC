@@ -1,6 +1,7 @@
 import LedFiles
+import pyftdi.serialext
 import sys
-import UART
+import codecs
 from Led import Ui_MainWindow
 from PySide6.QtWidgets import QMainWindow, QApplication
 from pyftdi.gpio import GpioAsyncController,GpioMpsseController,GpioMpsseController
@@ -60,11 +61,27 @@ class Led(QMainWindow):
         self.D14PushButton.clicked.connect(self.D14PushButtonState)
         #self.D15PushButton.clicked.connect(self.D15PushButtonState)
         self.OkPushButton.clicked.connect(self.push_OkPushButton)
+        self.Ok2PushButton.clicked.connect(self.push_Ok2PushButton)
         self.tabWidget.currentChanged.connect(self.UartTab)
 
     def UartTab(self, i):
         if i == 1:
-            UART.UART()
+            self.port = pyftdi.serialext.serial_for_url('ftdi:///1', baudrate=9600)
+        else:
+            self.gpio_in, self.gpio_out = GpioMpsseController(), GpioMpsseController()
+            self.gpio_in.configure('ftdi:///1', direction=0x0000, frequency=10e6)
+            self.gpio_out.configure('ftdi:///1', direction=0xFFFF, frequency=10e6)
+
+    def push_Ok2PushButton(self,):
+       data = self.lineEdit2.text()
+       #self.port.write(data)
+       x = 100
+       while x != 0:
+            messege = self.port.read(100)
+            print(messege)
+            x =- 1
+            print('.')
+            #self.textBrowser.setText(codecs.decode(messege, 'utf-8'))
 
     def D00PushButtonState(self):
         if(self.D00PushButton.isChecked()):
