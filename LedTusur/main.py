@@ -78,18 +78,24 @@ class Led(QMainWindow):
         data = self.lineEdit2.text()
         self.port.write(data)
         sun = ""
-        while True:
-            try:
-                messege = self.port.read()
-                if not messege:  # если строка пустая
-                    raise serial.SerialException("Пустое сообщение из порта")
-                moon = codecs.decode(messege, 'utf-8')
-                sun += moon
-                print(messege)
-            except serial.SerialException as e:
-                self.textBrowser.setText(sun)
-                print(f"Ошибка: {e}")
-                break
+        for i in range (len(data)):
+            messege = self.port.read()
+            moon = codecs.decode(messege, 'utf-8')
+            sun += moon
+            print(messege)
+        self.textBrowser.setText(sun)
+        #while True:
+        #    try:
+        #        messege = self.port.read()
+        #        if not messege:  # если строка пустая
+        #            raise serial.SerialException("Пустое сообщение из порта")
+        #        moon = codecs.decode(messege, 'utf-8')
+        #        sun += moon
+        #        print(messege)
+        #    except serial.SerialException as e:
+        #        self.textBrowser.setText(sun)
+        #        print(f"Ошибка: {e}")
+        #        break
 
     def D00PushButtonState(self):
         if(self.D00PushButton.isChecked()):
