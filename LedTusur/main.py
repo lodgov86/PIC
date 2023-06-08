@@ -1,3 +1,4 @@
+from shlex import join
 import LedFiles
 import pyftdi.serialext
 import sys
@@ -43,6 +44,7 @@ class Led(QMainWindow):
         self.D15PushButton = self.ui.D15PushButton
 
         self.out = 0 
+        self.x = 1
 
         self.D00PushButton.clicked.connect(self.D00PushButtonState)
         self.D01PushButton.clicked.connect(self.D01PushButtonState)
@@ -72,16 +74,22 @@ class Led(QMainWindow):
             self.gpio_in.configure('ftdi:///1', direction=0x0000, frequency=10e6)
             self.gpio_out.configure('ftdi:///1', direction=0xFFFF, frequency=10e6)
 
-    def push_Ok2PushButton(self,):
-       data = self.lineEdit2.text()
-       #self.port.write(data)
-       x = 100
-       while x != 0:
-            messege = self.port.read(100)
-            print(messege)
-            x =- 1
-            print('.')
-            #self.textBrowser.setText(codecs.decode(messege, 'utf-8'))
+    def push_Ok2PushButton(self):
+        data = self.lineEdit2.text()
+        self.port.write(data)
+        sun = ""
+        while True:
+            try:
+                messege = self.port.read()
+                if not messege:  # если строка пустая
+                    raise serial.SerialException("Пустое сообщение из порта")
+                moon = codecs.decode(messege, 'utf-8')
+                sun += moon
+                print(messege)
+            except serial.SerialException as e:
+                self.textBrowser.setText(sun)
+                print(f"Ошибка: {e}")
+                break
 
     def D00PushButtonState(self):
         if(self.D00PushButton.isChecked()):
